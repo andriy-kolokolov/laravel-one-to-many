@@ -17,8 +17,8 @@
         <thead>
         <tr class="fs-5 text-center text-align">
             <th class="col">Title</th>
-            <th class="col-2">Programming Languages</th>
-            <th class="col">Frameworks</th>
+            <th class="col-2">Programming Languages <br><span class="text-success">(many-to-many)</span></th>
+            <th class="col">Frameworks <br><span class="text-success">(one-to-many)</span></th>
             <th class="col-2">Description</th>
             <th class="col">Project URL</th>
             <th class="col">Actions</th>
