@@ -2,10 +2,10 @@
 
 @section('contents')
 
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
             <div class="card">
-                <div class="card-header">Project Details</div>
+                <div class="card-header fs-4 fw-bold">Project Details</div>
                 <div class="card-body">
                     <div class="mb-4">
                         <strong>Title:</strong> {{ $project->title }}
@@ -24,6 +24,9 @@
                         <strong>Frameworks:</strong>
                         {{ implode(', ', $project->frameworks()->pluck('framework')->toArray()) }}
                     </div>
+                    <a href="{{ route('admin.projects.index') }}">
+                        <button class="mt-3 btn btn-primary mt-2 mb-4">Back to Projects</button>
+                    </a>
                 </div>
             </div>
         </div>

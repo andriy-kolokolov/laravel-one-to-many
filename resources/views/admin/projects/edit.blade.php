@@ -3,11 +3,14 @@
 @section('contents')
     <h1 class="text-center mb-3">EDIT PROJECT</h1>
 
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
             <div class="card">
-                <div class="card-header text-center fs-4 fw-bold">{{ $project->title }}</div>
+                <div class="card-header text-center fs-4 fw-bold text-secondary">{{ $project->title }}</div>
                 <div class="card-body">
+                    <a href="{{ route('admin.projects.index') }}">
+                        <button class="mt-3 btn btn-primary mb-3">Back to Projects</button>
+                    </a>
                     <form method="POST" action="{{ route('admin.projects.update', $project->id) }}">
                         @csrf
                         @method('PUT')
@@ -69,7 +72,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Update Project</button>
+                        <button type="submit" class="btn btn-success mt-3">Update Project</button>
                     </form>
                 </div>
             </div>
