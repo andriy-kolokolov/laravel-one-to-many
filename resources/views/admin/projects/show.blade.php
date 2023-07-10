@@ -11,6 +11,9 @@
                         <strong>Title:</strong> {{ $project->title }}
                     </div>
                     <div class="mb-4">
+                        <strong>Type:</strong> {{ implode(', ', $project->types->pluck('type')->toArray()) }}
+                    </div>
+                    <div class="mb-4">
                         <strong>Description:</strong> {{ $project->description }}
                     </div>
                     <div class="mb-4">

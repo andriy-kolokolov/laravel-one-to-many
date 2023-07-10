@@ -27,6 +27,41 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="type">Type</label>
+                            <input type="text" name="type" id="type" class="form-control"
+                                   value="{{ implode(', ', $project->types()->pluck('type')->toArray()) }}">
+                            @error('title')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="programming_languages">Programming Languages</label>
+                            <input type="text" name="programming_languages" id="programming_languages"
+                                   class="form-control"
+                                   value="{{ implode(', ', $project->programmingLanguages()->pluck('programming_language')->toArray()) }}"
+                                   required>
+                            @error('programming_languages')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="frameworks">Frameworks</label>
+                            <input type="text" name="frameworks" id="frameworks" class="form-control"
+                                   value="{{ implode(', ', $project->frameworks()->pluck('framework')->toArray()) }}">
+                            @error('frameworks')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="description">Description</label>
                             <textarea name="description" id="description" class="form-control" rows="4"
                                       required>{{ $project->description }}</textarea>
@@ -42,33 +77,9 @@
                             <input type="text" name="project_url" id="project_url" class="form-control"
                                    value="{{ $project->project_url }}" required>
                             @error('project_url')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="programming_languages">Programming Languages</label>
-                            <input type="text" name="programming_languages" id="programming_languages"
-                                   class="form-control"
-                                   value="{{ implode(', ', $project->programmingLanguages()->pluck('programming_language')->toArray()) }}"
-                                   required>
-                            @error('programming_languages')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="frameworks">Frameworks</label>
-                            <input type="text" name="frameworks" id="frameworks" class="form-control"
-                                   value="{{ implode(', <br>', $project->frameworks()->pluck('framework')->toArray()) }}">
-                            @error('frameworks')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
 

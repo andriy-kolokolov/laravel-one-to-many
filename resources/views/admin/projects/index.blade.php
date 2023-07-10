@@ -5,11 +5,15 @@
 //dd($projects);
 @endphp
     <h1>Projects</h1>
-
+{{--    @php $project = session('delete_success') @endphp   --}}
     @if (session('delete_success'))
-        @php $project = session('delete_success') @endphp
         <div class="alert alert-danger">
-            Project "{{ $project->title }}" was deleted.
+            Project "{{ session('delete_success')->title }}" was deleted.
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            Project "{{ session('success')->title }}" was added successfully.
         </div>
     @endif
 

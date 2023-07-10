@@ -15,22 +15,56 @@
                         <div class="form-group">
                             <label for="title">Title:</label>
                             <input type="text" class="form-control" id="title" name="title" required>
+                            @error('title')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type:</label>
+                            <input type="text" class="form-control" id="type" name="type">
+                            @error('type')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="programming_languages">Programming Languages:</label>
                             <input type="text" class="form-control" id="programming_languages" name="programming_languages" required>
+                            @error('programming_languages')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="frameworks">Frameworks:</label>
                             <input type="text" class="form-control" id="frameworks" name="frameworks">
+                            @error('frameworks')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="description">Description:</label>
-                            <textarea class="form-control" id="description" name="description" required></textarea>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                            @error('description')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="project_url">Project URL:</label>
                             <input type="url" class="form-control" id="project_url" name="project_url" required>
+                            @error('project_url')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <button type="submit" class="mt-3 btn btn-success">Add Project</button>
                     </form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project\Project;
 use App\Models\Project\ProjectProgrammingLanguages;
 use App\Models\Project\ProjectFrameworks;
+use App\Models\Project\ProjectType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -13,6 +14,7 @@ class ProjectsController extends Controller
 {
     private array $validations = [
         'title' => 'required|string|min:5|max:50',
+        'type' => 'nullable|string',
         'programming_languages' => 'required|string|max:500',
         'frameworks' => 'nullable|max:500',
         'description' => 'nullable',
@@ -83,7 +85,19 @@ class ProjectsController extends Controller
                 $projectFramework->save();
             }
         }
-        return redirect()->route('admin.projects.index')->with('success', 'Project added successfully!');
+
+        // Process types if provided
+        if (!empty($validatedData['type'])) {
+            $types = preg_split('/[\s,]+/', $validatedData['type']);
+            foreach ($types as $type) {
+                $projectType = new ProjectType();
+                $projectType->project_id = $project->id;
+                $projectType->type = trim($type);
+                $projectType->save();
+            }
+        }
+
+        return redirect()->route('admin.projects.index')->with('success', $project);
     }
 
     /**
@@ -127,7 +141,7 @@ class ProjectsController extends Controller
         $project->update();
 
         // Process programming languages
-        $programmingLanguages = preg_split('/[\s,]+/', $validatedData['programming_languages']);
+        $programmingLanguages = explode(',', $validatedData['programming_languages']);
         // Remove existing programming languages for the project
         $project->programmingLanguages()->detach();
         // Add the new programming languages for the project
@@ -138,13 +152,25 @@ class ProjectsController extends Controller
 
         // Process frameworks if provided
         if (!empty($validatedData['frameworks'])) {
-            $frameworks = preg_split('/[\s,]+/', $validatedData['frameworks']);
+            $frameworks = explode(',', $validatedData['frameworks']);
             ProjectFrameworks::where('project_id', $project->id)->delete(); // Remove existing frameworks
             foreach ($frameworks as $framework) {
                 $projectFramework = new ProjectFrameworks();
                 $projectFramework->project_id = $project->id;
                 $projectFramework->framework = trim($framework);
                 $projectFramework->save();
+            }
+        }
+
+        // Process types if provided
+        if (!empty($validatedData['type'])) {
+            $types = explode(',', $validatedData['type']);
+            ProjectType::where('project_id', $project->id)->delete();
+            foreach ($types as $type) {
+                $projectType = new ProjectType();
+                $projectType->project_id = $project->id;
+                $projectType->type = trim($type);
+                $projectType->save();
             }
         }
 
