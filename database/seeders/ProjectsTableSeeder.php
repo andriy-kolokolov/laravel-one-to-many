@@ -75,6 +75,10 @@ class ProjectsTableSeeder extends Seeder
             ],
             [
                 'project_id' => 2,
+                'framework' => 'MySQL',
+            ],
+            [
+                'project_id' => 2,
                 'framework' => 'Maven',
             ],
             [
@@ -120,6 +124,30 @@ class ProjectsTableSeeder extends Seeder
             [
                 'project_id' => 4,
                 'language_id' => 7,
+            ],
+        ]);
+
+        // Seed project_types table
+        DB::table('project_types')->insert([
+            [
+                'project_id' => 1,
+                'type' => 'Front End',
+            ],
+            [
+                'project_id' => 2,
+                'type' => 'Back End',
+            ],
+            [
+                'project_id' => 3,
+                'type' => 'Back End',
+            ],
+            [
+                'project_id' => 4,
+                'type' => 'Web App Dev',
+            ],
+            [
+                'project_id' => 4,
+                'type' => 'Full Stack',
             ],
         ]);
     }

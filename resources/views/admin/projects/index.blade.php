@@ -16,11 +16,12 @@
     <table class="table table-secondary table-hover table-rounded">
         <thead>
         <tr class="fs-5 text-center text-align">
-            <th class="col">Title</th>
+            <th class="col-1">Title</th>
+            <th class="col-2">Type <br><span class="text-success">(one-to-many)</span></th>
             <th class="col-2">Programming Languages <br><span class="text-success">(many-to-many)</span></th>
-            <th class="col">Frameworks <br><span class="text-success">(one-to-many)</span></th>
+            <th class="col-1">Frameworks <br><span class="text-success">(one-to-many)</span></th>
             <th class="col-2">Description</th>
-            <th class="col">Project URL</th>
+            <th class="col-1">Project URL</th>
             <th class="col">Actions</th>
         </tr>
         </thead>
@@ -29,9 +30,19 @@
             <tr class="">
                 <td class="text-align text-center fw-bold fs-6">{{ $project->title }}</td>
                 <td class="text-align text-center">
-                    {{ $project->programmingLanguages->pluck('programming_language')->implode(', ') }}
+{{--                    {{ $project->types->pluck('type')->implode(', ') }}--}}
+                    @foreach($project->types as $type)
+                        {{ $type->type }}<br>
+                    @endforeach
                 </td>
                 <td class="text-align text-center">
+{{--                    {{ $project->programmingLanguages->pluck('programming_language')->implode(', ') }}--}}
+                    @foreach($project->programmingLanguages as $language)
+                        {{ $language->programming_language }}<br>
+                    @endforeach
+                </td>
+                <td class="text-align text-center">
+{{--                    {{ $project->frameworks->pluck('framework')->implode(', ') }}--}}
                     @foreach($project->frameworks as $framework)
                         {{ $framework->framework }}<br>
                     @endforeach

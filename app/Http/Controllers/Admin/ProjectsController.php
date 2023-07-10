@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project\Project;
-use App\Models\Project\ProjectsProgrammingLanguage;
-use App\Models\Project\ProjectFramework;
+use App\Models\Project\ProjectProgrammingLanguages;
+use App\Models\Project\ProjectFrameworks;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -68,7 +68,7 @@ class ProjectsController extends Controller
         $programmingLanguages = preg_split('/[\s,]+/', $validatedData['programming_languages']);
         $programmingLanguageIds = [];
         foreach ($programmingLanguages as $language) {
-            $programmingLanguage = ProjectsProgrammingLanguage::firstOrCreate(['programming_language' => trim($language)]);
+            $programmingLanguage = ProjectProgrammingLanguages::firstOrCreate(['programming_language' => trim($language)]);
             $programmingLanguageIds[] = $programmingLanguage->id;
         }
         $project->programmingLanguages()->sync($programmingLanguageIds);
@@ -77,7 +77,7 @@ class ProjectsController extends Controller
         if (!empty($validatedData['frameworks'])) {
             $frameworks = preg_split('/[\s,]+/', $validatedData['frameworks']);
             foreach ($frameworks as $framework) {
-                $projectFramework = new ProjectFramework();
+                $projectFramework = new ProjectFrameworks();
                 $projectFramework->project_id = $project->id;
                 $projectFramework->framework = trim($framework);
                 $projectFramework->save();
@@ -132,16 +132,16 @@ class ProjectsController extends Controller
         $project->programmingLanguages()->detach();
         // Add the new programming languages for the project
         foreach ($programmingLanguages as $language) {
-            $programmingLanguage = ProjectsProgrammingLanguage::firstOrCreate(['programming_language' => trim($language)]);
+            $programmingLanguage = ProjectProgrammingLanguages::firstOrCreate(['programming_language' => trim($language)]);
             $project->programmingLanguages()->attach($programmingLanguage->id);
         }
 
         // Process frameworks if provided
         if (!empty($validatedData['frameworks'])) {
             $frameworks = preg_split('/[\s,]+/', $validatedData['frameworks']);
-            ProjectFramework::where('project_id', $project->id)->delete(); // Remove existing frameworks
+            ProjectFrameworks::where('project_id', $project->id)->delete(); // Remove existing frameworks
             foreach ($frameworks as $framework) {
-                $projectFramework = new ProjectFramework();
+                $projectFramework = new ProjectFrameworks();
                 $projectFramework->project_id = $project->id;
                 $projectFramework->framework = trim($framework);
                 $projectFramework->save();
