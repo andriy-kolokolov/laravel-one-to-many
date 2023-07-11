@@ -13,7 +13,7 @@
     @endif
     @if (session('success'))
         <div class="alert alert-success">
-            Project "{{ session('success')->title }}" was added successfully.
+            Project "{{ session('success') }}" was added successfully.
         </div>
     @endif
 
